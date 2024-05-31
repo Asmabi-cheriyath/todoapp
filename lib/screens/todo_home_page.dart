@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -43,7 +44,20 @@ class _TodoHomePageState extends State<TodoHomePage> {
                     ],
                   ),
                 ),
-                const CircleAvatar(),
+                 CircleAvatar(
+                  child: IconButton(onPressed: (){
+                    final user=FirebaseAuth.instance.currentUser;
+                    FirebaseAuth.instance.signOut().then((value) {
+                      Navigator.pushNamedAndRemoveUntil(context, "/", (route) => false);
+
+                      print(user!.email);
+                    }
+                    );
+                     
+                   
+                    
+                  }, icon: const Icon(Icons.logout)),
+                ),
               ],
             ),
             const SizedBox(
@@ -53,7 +67,9 @@ class _TodoHomePageState extends State<TodoHomePage> {
               "Your To-Dos",
               style: themedata.textTheme.displayMedium,
             ),
-            const SizedBox(height: 10,),
+            const SizedBox(
+              height: 10,
+            ),
             Expanded(
               child: ListView.builder(
                   itemCount: 5,
@@ -61,7 +77,6 @@ class _TodoHomePageState extends State<TodoHomePage> {
                     return Card(
                       elevation: 5.0,
                       color: themedata.scaffoldBackgroundColor,
-                      
                       child: ListTile(
                         leading: const CircleAvatar(
                           backgroundColor: Colors.transparent,
@@ -71,14 +86,31 @@ class _TodoHomePageState extends State<TodoHomePage> {
                           ),
                         ),
                         title: Text(
-                          "Complete the Assignment before 10am tommorow",
+                          "ToDo One",
                           style: themedata.textTheme.displaySmall,
                         ),
                         subtitle: Text(
-                          "Todo one",
+                          "Complete the Assignment before 10am tommorow",
                           style: themedata.textTheme.displaySmall,
                         ),
-                        trailing: Container(width: 100,child: Row(children: [IconButton(onPressed: (){}, icon: const Icon(Icons.edit,color: Colors.teal,)),IconButton(onPressed: (){}, icon: const Icon(Icons.delete,color: Colors.red,))],)),
+                        trailing: Container(
+                            width: 100,
+                            child: Row(
+                              children: [
+                                IconButton(
+                                    onPressed: () {},
+                                    icon: const Icon(
+                                      Icons.edit,
+                                      color: Colors.teal,
+                                    )),
+                                IconButton(
+                                    onPressed: () {},
+                                    icon: const Icon(
+                                      Icons.delete,
+                                      color: Colors.red,
+                                    ))
+                              ],
+                            )),
                       ),
                     );
                   }),

@@ -78,7 +78,7 @@ class _AddTaskViewState extends State<AddTaskView> {
                   decoration: BoxDecoration(
                       color: Colors.teal,
                       borderRadius: BorderRadius.circular(10)),
-                      child: Center(child: Text("Add Tsak",style: themedata.textTheme.displayMedium,),),
+                      child: Center(child: Text("Add Task",style: themedata.textTheme.displayMedium,),),
                 ),
               ),
 

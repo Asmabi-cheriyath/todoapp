@@ -37,7 +37,7 @@ class _RegisterViewState extends State<RegisterView> {
     );
 
     try {
-      await Future.delayed(Duration(
+      await Future.delayed(const Duration(
         seconds: 2,
       ));
 
@@ -239,9 +239,9 @@ class _RegisterViewState extends State<RegisterView> {
             ),
             Visibility(
                 visible: _isLoading,
-                child: Center(
+                child: const Center(
                   child: CircularProgressIndicator(),
-                ))
+                )),
           ],
         ),
       ),

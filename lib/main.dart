@@ -4,6 +4,7 @@ import 'package:todoapp/firebase_options.dart';
 import 'package:todoapp/screens/add_task_page.dart';
 import 'package:todoapp/screens/login_page.dart';
 import 'package:todoapp/screens/register_page.dart';
+import 'package:todoapp/screens/splash_page.dart';
 import 'package:todoapp/screens/todo_home_page.dart';
 
 void main() async {
@@ -22,12 +23,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Flutter Demo",
-      initialRoute: "/",
+      initialRoute: "/splash",
       routes: {
-        '/':(context) => LoginView(),
-        '/register':(context) => RegisterView(),
-        '/home':(context) => TodoHomePage(),
-        '/addtask':(context) => AddTaskView(),
+        '/':(context) => const LoginView(),
+        '/register':(context) => const RegisterView(),
+        '/home':(context) => const TodoHomePage(),
+        '/addtask':(context) => const AddTaskView(),
+        '/splash':(context) => const SplashView()
       },
 
       theme: ThemeData(
@@ -36,7 +38,7 @@ class MyApp extends StatelessWidget {
               displaySmall: TextStyle(color: Colors.white70, fontSize: 14),
               ),
           scaffoldBackgroundColor: const Color(0xff0E1D3E),
-          appBarTheme: AppBarTheme(backgroundColor: Color(0xff0E1D3E),
+          appBarTheme: const AppBarTheme(backgroundColor: Color(0xff0E1D3E),
           iconTheme: IconThemeData(color: Colors.white)),
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true),

@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:todoapp/services/auth_service.dart';
 
 class TodoHomePage extends StatefulWidget {
   const TodoHomePage({super.key});
@@ -47,10 +48,11 @@ class _TodoHomePageState extends State<TodoHomePage> {
                  CircleAvatar(
                   child: IconButton(onPressed: (){
                     final user=FirebaseAuth.instance.currentUser;
-                    FirebaseAuth.instance.signOut().then((value) {
+                    // FirebaseAuth.instance.signOut()
+                    AuthService().logout().then((value) {
                       Navigator.pushNamedAndRemoveUntil(context, "/", (route) => false);
 
-                      print(user!.email);
+                      // print(user!.email);
                     }
                     );
                      

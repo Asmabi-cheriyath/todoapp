@@ -53,20 +53,18 @@ class AuthService {
     }
   }
 
-  Future<void>logout() async{
-    SharedPreferences _pref=await SharedPreferences.getInstance();
+  Future<void> logout() async {
+    SharedPreferences _pref = await SharedPreferences.getInstance();
     await _pref.clear();
     await _auth.signOut();
-
   }
-  Future<bool>isloggedin()async{
-    SharedPreferences _pref=await SharedPreferences.getInstance();
-    String? _token=await _pref.getString('token');
-    if(_token==null){
+
+  Future<bool> isloggedin() async {
+    SharedPreferences _pref = await SharedPreferences.getInstance();
+    String? _token = await _pref.getString('token');
+    if (_token == null) {
       return false;
-      
-    }
-    else{
+    } else {
       return true;
     }
   }

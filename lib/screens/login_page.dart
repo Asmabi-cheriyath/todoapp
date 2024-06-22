@@ -16,15 +16,14 @@ class _LoginViewState extends State<LoginView> {
   TextEditingController _passwordController = TextEditingController();
   final _loginKey = GlobalKey<FormState>();
 
-  UserModel _userModel=UserModel();
-  AuthService _authService=AuthService();
+  UserModel _userModel = UserModel();
+  AuthService _authService = AuthService();
 
-  bool _isLoading=false;
+  bool _isLoading = false;
 
-  void _login()async{
-
+  void _login() async {
     setState(() {
-      _isLoading=true;
+      _isLoading = true;
     });
 
     // try{
@@ -32,11 +31,11 @@ class _LoginViewState extends State<LoginView> {
 
     //   final data=await _authService.loginUser(_userModel);
 
-      // if(data!=null){
+    // if(data!=null){
 
-      //   Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
+    //   Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
 
-      // }
+    // }
     //   on FirebaseAuthException catch (e){
     //     setState(() {
     //       _isLoading=false;
@@ -46,19 +45,16 @@ class _LoginViewState extends State<LoginView> {
     //   }
     // }
 
-    try{
+    try {
+      _userModel = UserModel(
+          email: _emailController.text, password: _passwordController.text);
 
-      _userModel=UserModel(email: _emailController.text,password: _passwordController.text);
+      final data = await _authService.loginUser(_userModel);
 
-       final data=await _authService.loginUser(_userModel);
-
-       if(data!=null){
-
+      if (data != null) {
         Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
-
       }
-
-    }on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException catch (e) {
       setState(() {
         _isLoading = false;
       });
@@ -67,10 +63,7 @@ class _LoginViewState extends State<LoginView> {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(err[1])));
     }
-
-
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +84,7 @@ class _LoginViewState extends State<LoginView> {
                     "Login to Your Account",
                     style: themedata.textTheme.displayMedium,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   TextFormField(
@@ -108,19 +101,19 @@ class _LoginViewState extends State<LoginView> {
                       hintStyle: themedata.textTheme.displaySmall,
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.white,
                         ),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.white,
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   TextFormField(
@@ -138,23 +131,23 @@ class _LoginViewState extends State<LoginView> {
                         hintStyle: themedata.textTheme.displaySmall,
                         enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(color: Colors.white)),
+                            borderSide: const BorderSide(color: Colors.white)),
                         focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(color: Colors.white))),
+                            borderSide: const BorderSide(color: Colors.white))),
                   ),
-                  SizedBox(height: 10,),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   InkWell(
-                    onTap: () async{
-                      if(_loginKey.currentState!.validate()){
-                      //   UserCredential userdata= await FirebaseAuth.instance.signInWithEmailAndPassword(email: _emailController.text.trim(), password: _passwordController.text.trim());
-                      // if(userdata!=null){
-                      //   Navigator.pushNamedAndRemoveUntil(context, "/home", (route) => false);
-                      // }
-            
-                      _login();
-            
-            
+                    onTap: () async {
+                      if (_loginKey.currentState!.validate()) {
+                        //   UserCredential userdata= await FirebaseAuth.instance.signInWithEmailAndPassword(email: _emailController.text.trim(), password: _passwordController.text.trim());
+                        // if(userdata!=null){
+                        //   Navigator.pushNamedAndRemoveUntil(context, "/home", (route) => false);
+                        // }
+
+                        _login();
                       }
                     },
                     child: Container(
@@ -163,22 +156,45 @@ class _LoginViewState extends State<LoginView> {
                       decoration: BoxDecoration(
                           color: Colors.teal,
                           borderRadius: BorderRadius.circular(10)),
-                          child: Center(child: Text("Login",style: themedata.textTheme.displayMedium,),),
+                      child: Center(
+                        child: Text(
+                          "Login",
+                          style: themedata.textTheme.displayMedium,
+                        ),
+                      ),
                     ),
                   ),
-                  SizedBox(height: 10,),
-                  Row(mainAxisAlignment: MainAxisAlignment.center,
-                    children: [Text("Don't have an Account?",style: themedata.textTheme.displaySmall,),
-                  SizedBox(width: 10,),
-                  InkWell(
-                    onTap: () {
-                      Navigator.pushNamed(context, '/register');
-                    },
-                    child: Text("Create Now",style: themedata.textTheme.displayMedium,))],)
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Don't have an Account?",
+                        style: themedata.textTheme.displaySmall,
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(context, '/register');
+                          },
+                          child: Text(
+                            "Create Now",
+                            style: themedata.textTheme.displayMedium,
+                          ))
+                    ],
+                  )
                 ],
               ),
             ),
-            Visibility(visible: _isLoading,child: Center(child: CircularProgressIndicator(),))
+            Visibility(
+                visible: _isLoading,
+                child: const Center(
+                  child: CircularProgressIndicator(),
+                ))
           ],
         ),
       ),
@@ -191,6 +207,4 @@ class _LoginViewState extends State<LoginView> {
   //                   Navigator.pushNamedAndRemoveUntil(context, "/home", (route) => false);
   //                 }
   // }
-
-
 }

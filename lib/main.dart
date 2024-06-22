@@ -25,24 +25,23 @@ class MyApp extends StatelessWidget {
       title: "Flutter Demo",
       initialRoute: "/splash",
       routes: {
-        '/':(context) => const LoginView(),
-        '/register':(context) => const RegisterView(),
-        '/home':(context) => const TodoHomePage(),
-        '/addtask':(context) => const AddTaskView(),
-        '/splash':(context) => const SplashView()
+        '/': (context) => const LoginView(),
+        '/register': (context) => const RegisterView(),
+        '/home': (context) => const TodoHomePage(),
+        '/addtask': (context) => const AddTaskView(),
+        '/splash': (context) => const SplashView()
       },
-
       theme: ThemeData(
           textTheme: const TextTheme(
-              displayMedium: TextStyle(color: Colors.white, fontSize: 18),
-              displaySmall: TextStyle(color: Colors.white70, fontSize: 14),
-              ),
+            displayMedium: TextStyle(color: Colors.white, fontSize: 18),
+            displaySmall: TextStyle(color: Colors.white70, fontSize: 14),
+          ),
           scaffoldBackgroundColor: const Color(0xff0E1D3E),
-          appBarTheme: const AppBarTheme(backgroundColor: Color(0xff0E1D3E),
-          iconTheme: IconThemeData(color: Colors.white)),
+          appBarTheme: const AppBarTheme(
+              backgroundColor: Color(0xff0E1D3E),
+              iconTheme: IconThemeData(color: Colors.white)),
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true),
-     
     );
   }
 }
